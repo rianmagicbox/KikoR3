@@ -205,4 +205,4 @@ client.on("message", message => {
 }
     });
 
-client.login("ODc5Nzc5OTkzMzk0MjIxMTQ3.YSUs9w.OpwN3lOv4YFUWONIbn3p7rfeoqI"); //Ligando o Bot caso ele consiga acessar o token
+client.login("*********************************"); //Ligando o Bot caso ele consiga acessar o token

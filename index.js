@@ -1,19 +1,6 @@
 const { prefix, token } = require("./config.json");
-const express = require("express");
-const app = express();
-app.get("/", (request, response) => {
-  const ping = new Date();
-  ping.setHours(ping.getHours() - 3);
-  console.log(
-    `Ping recebido às ${ping.getUTCHours()}:${ping.getUTCMinutes()}:${ping.getUTCSeconds()}`
-  );
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT); // Recebe solicitações que o deixa online
-
 const Discord = require("discord.js"); //Conexão com a livraria Discord.js
 const client = new Discord.Client(); //Criação de um novo Client
-const config = require("./config.json"); //Pegando o prefixo do bot para respostas de comandos
 function contagemregressiva (message) {
   setTimeout(function() {
     message.channel.send("contagem regressiva");
@@ -130,6 +117,12 @@ client.on("message", message => {
     var randcharadas = charadas[Math.floor(Math.random() * charadas.length)];
     randcharadas(message);
 
+  } else if (command === 'oi') {
+    const xboxid = message.guild.emojis.cache?.find(emoji => emoji.name == 'xbox').id;
+
+    message.react(`<:xbox:${xboxid}>`);
+  } else if (command === "bot") {
+    message.channel.send("🥚 pó pó 🐔");
   } else if (command === "gif") {
     message.channel.send("https://c.tenor.com/2FBo3mMHE9kAAAAC/naruto-dance.gif");
   } else if (command === "quehsão?") {
@@ -176,33 +169,18 @@ client.on("message", message => {
 
     message.channel.send(exampleEmbed);
   } else if (message.content === `${prefix}server`) {
-	message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
-} else if (command === 'delete') {
-	const amount = parseInt(args[0]);
+	    message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+  } else if (command === 'delete') {
+	  const numerodmenssagem = parseInt(args[0]); 
 
-	if (isNaN(amount)) {
-		return message.reply('that doesn\'t seem to be a valid number.');
-	} 
-
-	// ...
-  if (isNaN(amount)) {
-	return message.reply('that doesn\'t seem to be a valid number.');
-} else if (amount < 2 || amount > 100) {
-	return message.reply('you need to input a number between 2 and 100.');
-  message.channel.bulkDelete(amount, true).catch(err => {
-	console.error(err);
-	message.channel.send('there was an error trying to prune messages in this channel!');
+    if (isNaN(numerodmenssagem)) {
+	    return message.reply('esse não parece ser um número válido.');
+    } else if (numerodmenssagem < 2 || numerodmenssagem > 100) {
+	    return message.reply('você precisa inserir um número entre 2 e 100.');
+    }
+  
+    message.channel.bulkDelete(numerodmenssagem);
+  }
 });
-}
 
-// ...
-  
-  if (message.content === 'oi!') {
-	message.react('\:white_check_mark:');
-}
-  
-  message.channel.bulkDelete(amount);
-}
-    });
-
-client.login("*********************************"); //Ligando o Bot caso ele consiga acessar o token
+client.login("*******************************"); 

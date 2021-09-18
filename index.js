@@ -117,10 +117,19 @@ client.on("message", message => {
     var randcharadas = charadas[Math.floor(Math.random() * charadas.length)];
     randcharadas(message);
 
-  } else if (command === 'oi') {
+  } else if (command === '➥') {
+    const playstationid = message.guild.emojis.cache?.find(emoji => emoji.name == 'playstation').id;
+    const epicgamesid = message.guild.emojis.cache?.find(emoji => emoji.name == 'epicgames').id;
+    const nintendoid = message.guild.emojis.cache?.find(emoji => emoji.name == 'nintendo').id;
+    const mobileid = message.guild.emojis.cache?.find(emoji => emoji.name == 'mobile').id;
     const xboxid = message.guild.emojis.cache?.find(emoji => emoji.name == 'xbox').id;
-
+    
+    message.react(`<:epicgames:${epicgamesid}>`);
     message.react(`<:xbox:${xboxid}>`);
+    message.react(`<:playstation:${playstationid}>`);
+    message.react(`<:nintendo:${nintendoid}>`);
+    message.react(`<:mobile:${mobileid}`);
+    
   } else if (command === "bot") {
     message.channel.send("🥚 pó pó 🐔");
   } else if (command === "gif") {

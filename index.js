@@ -121,26 +121,6 @@ client.on("message", message => {
   if (command === "rocket") {
     message.channel.send("league.");
     
-  } else if (command === "cargo") {
-    console.log(message);
-    message.channel.send(message.author.username);
-    let rMember =
-    message.mentions.members.first() || // `.first()` is a function.
-    message.guild.members.cache.find((m) => m.user.tag === message.author.username) ||
-    message.guild.members;
-    let role =
-    message.guild.roles.cache.find((r) => r.name == args[0]) ||
-    message.guild.roles.cache.find((r) => r.id == args[0]) ||
-    message.mentions.roles.first();
-    if (!role)
-      return message.channel.send(
-      "Which role do I give to this user, frog lover? :point_right: :point_left:"
-    );
-    if(message.member.roles.cache.has(role.id)) {
-      console.log(`Yay, the author of the message has the role!`);
-    } else {
-      message.member.roles.add(role).catch(console.error);
-    }
   } else if (command === "charada") {
     var charadas = [charada1, charada2, charada3]
     var randcharadas = charadas[Math.floor(Math.random() * charadas.length)];

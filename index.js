@@ -1,6 +1,11 @@
 const { prefix, token } = require("./config.json");
-const Discord = require("discord.js"); //Conexão com a livraria Discord.js
-const client = new Discord.Client(); //Criação de um novo Client
+const { Client, Intents } = require('discord.js');
+
+const client = new Client({
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
+});
+
 function contagemregressiva (message) {
   setTimeout(function() {
     message.channel.send("contagem regressiva");
@@ -80,6 +85,30 @@ client.on("guildMemberAdd", (member) => {
     member.send(`seja bem-vindo ${member.user.username}`);
 });
 
+client.on('messageReactionAdd', async (reaction, user) => {
+  try {
+    await reaction.fetch();
+    console.log(reaction.message);
+    let rMember = reaction.message.guild.members.cache.find((m) => m.user.tag === user.tag);
+    let role = reaction.message.guild.roles.cache.find((r) => r.name == '❖ ' + reaction.emoji.name);
+    if (!role)
+      return reaction.message.channel.send(
+      "Which role do I give to this user, frog lover? :point_right: :point_left:"
+    );
+    if(rMember.roles.cache.has(role.id)) {
+      console.log(`Yay, the author of the message has the role!`);
+    } else {
+      rMember.roles.add(role).catch(console.error);
+    }
+  } catch (error) {
+    console.error('Something went wrong when fetching the message:', error);
+    return;
+  }
+
+	console.log(`${reaction.message.author}'s message "${reaction.message.content}" gained a reaction!`);
+	console.log(`${reaction.count} user(s) have given the same reaction to this message!`);
+});
+
 client.on("message", message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
@@ -117,14 +146,17 @@ client.on("message", message => {
     var randcharadas = charadas[Math.floor(Math.random() * charadas.length)];
     randcharadas(message);
 
+  } else if (command === "memedeimagem") {
+    message.channel.send("https://i.pinimg.com/originals/7b/4f/33/7b4f331d1244f89c1b9e8efbd021b49e.png");
+
   } else if (command === '➥') {
     const playstationid = message.guild.emojis.cache?.find(emoji => emoji.name == 'playstation').id;
-    const epicgamesid = message.guild.emojis.cache?.find(emoji => emoji.name == 'epicgames').id;
+    const pcid = message.guild.emojis.cache?.find(emoji => emoji.name == 'pc').id;
     const nintendoid = message.guild.emojis.cache?.find(emoji => emoji.name == 'nintendo').id;
     const mobileid = message.guild.emojis.cache?.find(emoji => emoji.name == 'mobile').id;
     const xboxid = message.guild.emojis.cache?.find(emoji => emoji.name == 'xbox').id;
     
-    message.react(`<:epicgames:${epicgamesid}>`);
+    message.react(`<:pc:${pcid}>`);
     message.react(`<:xbox:${xboxid}>`);
     message.react(`<:playstation:${playstationid}>`);
     message.react(`<:nintendo:${nintendoid}>`);
@@ -192,4 +224,4 @@ client.on("message", message => {
   }
 });
 
-client.login("*******************************"); 
+client.login(token);

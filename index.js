@@ -1,5 +1,5 @@
 const { prefix, token } = require("./config.json");
-const { Client, Intents } = require('discord.js');
+const { Client, Intents, MessageEmbed } = require('discord.js');
 
 const client = new Client({
 	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
@@ -72,7 +72,7 @@ client.on("guildMemberAdd", (member) => {
   var gifs = ["https://magiagifs.com.br/wp-content/uploads/2019/08/gifs-anime22.gif","https://media2.giphy.com/media/f4V2mqvv0wT9m/giphy.gif?cid=ecf05e47vrzo2lrelin3gl5o0jou9vm3qkzhyq0rb07396xs&rid=giphy.gif&ct=g","https://i.pinimg.com/originals/cf/4d/98/cf4d9899601b696bbafc065eef9df166.gif","https://media3.giphy.com/media/139eZBmH1HTyRa/giphy.gif?cid=790b7611659b1bb0d222fefcd7e034180763387309b25154&rid=giphy.gif&ct=g","https://media4.giphy.com/media/RTVur5J0hr1dWiIdZf/giphy.gif?cid=790b761176895ae6854a9ab9c41b13579ff9b400dfac38bc&rid=giphy.gif&ct=g"];
   var randgif = gifs[Math.floor(Math.random() * gifs.length)];
   console.log(member);  
-  const mensagem = new Discord.MessageEmbed()
+  const mensagem = new MessageEmbed()
   .setColor('##9400D3')
   .setTitle(`seja bem-vindo para o nosso sever ${member.user.username}`)
   .setAuthor('kikoR3')
@@ -118,18 +118,7 @@ client.on("message", message => {
     .split(/ +/);
   const command = args.shift().toLowerCase();
 
-  if (command === "rocket") {
-    message.channel.send("league.");
-    
-  } else if (command === "charada") {
-    var charadas = [charada1, charada2, charada3]
-    var randcharadas = charadas[Math.floor(Math.random() * charadas.length)];
-    randcharadas(message);
-
-  } else if (command === "memedeimagem") {
-    message.channel.send("https://i.pinimg.com/originals/7b/4f/33/7b4f331d1244f89c1b9e8efbd021b49e.png");
-
-  } else if (command === '➥') {
+  if (command === '➥') {
     const playstationid = message.guild.emojis.cache?.find(emoji => emoji.name == 'playstation').id;
     const pcid = message.guild.emojis.cache?.find(emoji => emoji.name == 'pc').id;
     const nintendoid = message.guild.emojis.cache?.find(emoji => emoji.name == 'nintendo').id;
@@ -142,53 +131,42 @@ client.on("message", message => {
     message.react(`<:nintendo:${nintendoid}>`);
     message.react(`<:mobile:${mobileid}`);
     
+  } else if (command === "rocket") {
+    message.channel.send("league."); 
+  } else if (command === "charada") {
+    var charadas = [charada1, charada2, charada3]
+    var randcharadas = charadas[Math.floor(Math.random() * charadas.length)];
+    randcharadas(message);
+  } else if (command === "memedeimagem") {
+    message.channel.send("https://i.pinimg.com/originals/7b/4f/33/7b4f331d1244f89c1b9e8efbd021b49e.png");
   } else if (command === "bot") {
     message.channel.send("🥚 pó pó 🐔");
   } else if (command === "gif") {
     message.channel.send("https://c.tenor.com/2FBo3mMHE9kAAAAC/naruto-dance.gif");
-  } else if (command === "quehsão?") {
-    const Data = new Date();
-    message.channel.send(Data.toLocaleTimeString());
-    
-  } else if (command === "dunk") {
-    message.channel.send("aqui esta o dunk❗ https://media.giphy.com/media/f7N5HZny5eWXqAmN27/giphy.gif");
-  
   } else if (command === "ping") {
     message.channel.send("pong")
   } else if (command === "piada") {
     message.channel.send("Você conhece a piada do pônei? - Pô nei eu")
-  } else if (command === "walldrag-dunk") {
-    message.channel.send("aqui esta o walldrag-dunk❗ https://media.giphy.com/media/VDMahXlG9aP29oHE9i/giphy.gif")
-  } else if (command === "walldrag") {
-    message.channel.send("aqui esta o walldrag❗ https://media.giphy.com/media/efseqrFXskWmRZoZ56/giphy.gif ")
-  } else if (command === "help") {
-    // inside a command, event listener, etc.
-    const exampleEmbed = new Discord.MessageEmbed()
+  } else if (command === "ajuda") {
+    const ajuda = new MessageEmbed()
     .setColor('#4feacb')
-    .setTitle('ajuda/help')
+    .setTitle('ajuda')
     .setAuthor('kikoR3')
-    .setDescription('use "$" para ativar um comando')
+    .setDescription('use "!" para ativar um comando')
     .addFields(
-      { name: 'comandos disponiveis:', value: '\u200B' , inline: true  },
-      { name: '\u200B', value: '\u200B' },
-      { name: '$rocket', value: 'responde "⁕⁕⁕⁕⁕⁕"', inline: true },
-      { name: '\u200B', value: '\u200B' },
-      { name: '$quehsão?', value: 'mostra a hora', inline: true },
-      { name: '\u200B', value: '\u200B' },
-      { name: '$(fale uma destas jogadas a baixo)', value: '\u200B' , inline: true },
-      { name: 'lista de jogadas:', value: '\u200B' , inline: false },
-      { name: '\u200B', value: '\u200B' },
-      { name: '1°', value: '$dunk', inline: true },
-      { name: '2°', value: '$walldrag-dunk', inline: true },
-      { name: '3°', value: '$walldrag', inline: true },
-      { name: '\u200B', value: '\u200B' },
-      { name: '$help', value: 'mostra esta ajuda', inline: true },
-     )
-    .addField('mande suas jogadas para eu registrar no meu sever', 'obrigado', false)    
+      { name: 'comandos disponiveis:', value: '\u200B' , inline: true  })
+    .addField('!rocket', 'responde "⁕⁕⁕⁕⁕⁕"', false)
+    .addField('!charada', 'conta uma charada', false)
+    .addField('!piada', 'conta uma piada', false)
+    .addField('!bot', 'segredo', false)
+    .addField('!server', 'informações do server', false)
+    .addField('!ping', 'responde: pong', false)
+    .addField('!memedeimagem', 'manda um meme de imagem', false)
+    .addField('!gif', 'manda um gif de preconceito com os uchiras', false)   
     .setTimestamp()
-    .setFooter('tchal');
+    .setFooter('até mais!');
 
-    message.channel.send(exampleEmbed);
+    message.channel.send(ajuda);
   } else if (message.content === `${prefix}server`) {
 	    message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
   } else if (command === 'delete') {

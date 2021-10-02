@@ -137,6 +137,12 @@ client.on("message", message => {
     
   } else if (command === "rocket") {
     message.channel.send("league."); 
+  } else if (command === "clips") {
+    const clip1 = "https://www.youtube.com/watch?v=ko81ouwFTK0";
+    const clip2 = "https://www.youtube.com/watch?v=El0Z0rjqKdo";
+    var clips = [clip1, clip2];
+    var randclips = clips[Math.floor(Math.random() * clips.length)];
+    message.channel.send(randclips);
   } else if (command === "charada") {
     var charadas = [charada1, charada2, charada3]
     var randcharadas = charadas[Math.floor(Math.random() * charadas.length)];

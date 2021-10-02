@@ -169,6 +169,7 @@ client.on("message", message => {
     .addField('!rocket', 'responde "⁕⁕⁕⁕⁕⁕"', false)
     .addField('!charada', 'conta uma charada', false)
     .addField('!piada', 'conta uma piada', false)
+    .addField('!troll', 'teste você mesmo', false)
     .addField('!bot', 'segredo', false)
     .addField('!server', 'informações do server', false)
     .addField('!ping', 'responde: pong', false)

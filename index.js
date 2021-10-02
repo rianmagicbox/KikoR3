@@ -8,59 +8,63 @@ const client = new Client({
 
 function contagemregressiva (message) {
   setTimeout(function() {
-    message.channel.send("contagem regressiva");
-  }, 9000);
-  setTimeout(function() {
-    message.channel.send("10");
-  }, 10000);
-  setTimeout(function() {
-    message.channel.send("9");
-  }, 11000);
-  setTimeout(function() {
-    message.channel.send("8");
-  }, 12000);
-  setTimeout(function() {
-    message.channel.send("7");
-  }, 13000);
-  setTimeout(function() {
-    message.channel.send("6");
-  }, 14000);
-  setTimeout(function() {
-    message.channel.send("5");
-  }, 15000);
-  setTimeout(function() {
-    message.channel.send("4");
-  }, 16000);
-  setTimeout(function() {
-    message.channel.send("3");
-  }, 17000);
-  setTimeout(function() {
-    message.channel.send("2");
-  }, 18000);
-  setTimeout(function() {
-    message.channel.send("1");
-  }, 19000);
+    message.channel.send("contagem regressiva").then(message => {
+      setTimeout(function() {
+        message.edit("10");
+      }, 10000);
+      setTimeout(function() {
+        message.edit("9");
+      }, 11000);
+      setTimeout(function() {
+        message.edit("8");
+      }, 12000);
+      setTimeout(function() {
+        message.edit("7");
+      }, 13000);
+      setTimeout(function() {
+        message.edit("6");
+      }, 14000);
+      setTimeout(function() {
+        message.edit("5");
+      }, 15000);
+      setTimeout(function() {
+        message.edit("4");
+      }, 16000);
+      setTimeout(function() {
+        message.edit("3");
+      }, 17000);
+      setTimeout(function() {
+        message.edit("2");
+      }, 18000);
+      setTimeout(function() {
+        message.edit("1");
+      }, 19000);
+      setTimeout(function() {
+        message.delete();
+      }, 19000);
+    })
+  }, 1000);
 }
 function charada1 (message) {
   message.channel.send("Perguntaram para Maria quantos anos ela tem. Maria respondeu que em dois anos terá o dobro da idade que ela tinha há cinco anos. Quantos anos Maria tem?");
   contagemregressiva(message);
   setTimeout(function() {
     message.channel.send("Resposta: 12 anos.");
-  }, 20000);
+  }, 23000);
 }
 function charada2 (message) {
   message.channel.send("Alguns meses tem 31 dias, outros apenas 30 dias. Quantos meses tem 28 dias?");
   contagemregressiva(message);
   setTimeout(function() {
     message.channel.send("Resposta: Todos.");
-  }, 20000);
+  }, 23000);
 }
 function charada3 (message) {
   message.channel.send("O que é, o que é? Nunca volta, embora nunca tenha ido.");
   contagemregressiva(message);
   setTimeout(function() {
   message.channel.send("resposta: O passado.")
-  }, 20000);
+  }, 23000);
 }
 
 client.once("ready", () => {

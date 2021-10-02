@@ -149,6 +149,13 @@ client.on("message", message => {
     message.channel.send("https://c.tenor.com/2FBo3mMHE9kAAAAC/naruto-dance.gif");
   } else if (command === "ping") {
     message.channel.send("pong")
+  } else if (command === "troll") {
+    message.channel.send("chega mais perto amigo", {
+      files: [{
+        attachment: "./efeitossonoros/avisoimportante.mp3",
+        name: "SPOILER_avisoimportante.mp3"
+      }]
+    });
   } else if (command === "piada") {
     message.channel.send("Você conhece a piada do pônei? - Pô nei eu")
   } else if (command === "ajuda") {

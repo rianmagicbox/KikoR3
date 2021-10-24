@@ -140,7 +140,9 @@ client.on("message", message => {
   } else if (command === "clips") {
     const clip1 = "https://www.youtube.com/watch?v=ko81ouwFTK0";
     const clip2 = "https://www.youtube.com/watch?v=El0Z0rjqKdo";
-    var clips = [clip1, clip2];
+    const clip3 = "https://www.youtube.com/watch?v=AdsKdKdlHg4";
+    const clip4 = "https://www.youtube.com/watch?v=Mj_LUkA36R8";
+    var clips = [clip1, clip2, clip3, clip4];
     var randclips = clips[Math.floor(Math.random() * clips.length)];
     message.channel.send(randclips);
   } else if (command === "charada") {

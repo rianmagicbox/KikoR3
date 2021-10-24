@@ -2,7 +2,7 @@ const { prefix, token } = require("./config.json");
 const { Client, Intents, MessageEmbed } = require('discord.js');
 
 const client = new Client({
-	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
+	intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, "GUILD_MEMBERS","GUILD_PRESENCES"],
 	partials: ['MESSAGE', 'CHANNEL', 'REACTION'],
 });
 
@@ -187,8 +187,9 @@ client.on("message", message => {
     .setFooter('até mais!');
 
     message.channel.send(ajuda);
-  } else if (message.content === `${prefix}server`) {
-	    message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}`);
+  } else if (command === "server") {
+    let onlineMembers = message.guild.members.cache.filter((member) => !member.user.bot && member.user.presence.status == 'online').size;
+	    message.channel.send(`Server name: ${message.guild.name}\nTotal members: ${message.guild.memberCount}\nMembers online: ${onlineMembers}`);
   } else if (command === 'delete') {
 	  const numerodmenssagem = parseInt(args[0]); 
 
